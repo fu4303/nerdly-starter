@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <script>
+// Check that service workers are supported
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js');
+  });
+}
+</script>
+   <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ pageTitle or meta.title }}</title>
+   
+   <link rel="icon" href="{{meta.icon}}">
+    <meta name="theme-color" content="{{meta.themeColor}}" />
+    <!-- add manifest -->
+    <link rel="manifest" href="./app.webmanifest" />
+    <!--canonical url-->
+    <link rel="canonical" href="{{page.url}}">
+    <meta property="og:title" content="{{meta.title}}" />
+    <meta name="author" content="Maye Edwin" />
+    <meta name="keywords" content="{{meta.keywords}}">
+    <meta name="description" content="{{meta.description}}}">
+    
+    <!-- Twitter meta data -->
+  <meta name="twitter:card" content="{{meta.title}}">
+  <meta name="twitter:url" content="{{page.url}}">
+  <meta name="twitter:title" content="{{pageTitle}}">
+  <meta name="twitter:description" content="{{meta.description}}">
+  <meta name="twitter:image" content="{{meta.socialImage}}">
+  <meta name="twitter:site" content="@mayeedwin1">
+    
+    <link href="./jenga/App.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+    
+    <header>
+    <span>
+     <img 
+     style="width: 80px;
+     border-radius: 10px;
+     box-shadow: 4px 4px 0 aquamarine;" 
+     src="https://cdn.glitch.com/6cecabe5-99c7-4978-b77c-61920eb6a2d7%2Fmaye.jpg?v=1576887421955" 
+     alt="Maye Edwin">
+     
+     </span>
+      {{ content | safe }}
+    </header>
+
+     <h2>All <b>Nerdy</b> posts</h2>
+
+    <ul>
+      {%- for post in collections.posts -%}
+        <li>{{ post.date.toLocaleDateString() }} - <a href="{{ post.url }}">{{ post.data.title }}</a></li>
+      {%- endfor -%}
+    </ul>
+    
+   <!-- <h2>💍 My webring of friends</h2>
+    <ul class="no-bullet">
+      {%- for friend in friends -%}
+        <li>
+          <img class="avatar" src="{{ friend.avatar }}">
+          <a href="https://{{ friend.domain }}.glitch.me">{{ friend.domain }}</a> 
+          -- {{ friend.description }}</li>
+      {%- endfor -%}
+    </ul> 
+    <p>...or check out this not-historically-accurate <a href="/webring/">webring view</a>!</p>
+  -->
+    </main>
+    <footer>
+    
+      <p>Tiny blog by <a href="https://twitter.com/mayeedwin1" target="_blank">Maye Edwin</a>.</p>
+    
+      <small>Claps 👏 to <a href="https://twitter.com/notwaldorf">Monica</a> and <a href="https://twitter.com/jllord">Jessica</a> for this template.</small>
+    </footer>
+    
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    projectId: "nerdlyweb",
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+  </body>
+</html>
